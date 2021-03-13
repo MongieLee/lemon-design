@@ -16,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/MongieLee/lemon-design/issues"
   },
-  "homepage": "https://github.com/MongieLee/lemon-design#readme"
+  "homepage": "https://github.com/MongieLee/lemon-design#readme",
+  "devDependencies": {
+    "awesome-typescript-loader": "^5.2.1",
+    "typescript": "^4.2.3",
+    "webpack": "4.29.6",
+    "webpack-cli": "3.2.3"
+  }
 }
