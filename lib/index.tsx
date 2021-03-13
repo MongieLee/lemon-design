@@ -1,3 +1,6 @@
-const div = document.createElement('div');
-div.textContent = '测试';
-document.body.appendChild(div);
+import * as React from 'react';
+import ReactDom from 'react-dom';
+
+console.log(React);
+
+console.log(ReactDom);
