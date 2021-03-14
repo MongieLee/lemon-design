@@ -1,0 +1,22 @@
+.ld-button {
+  color: #404040;
+  border: 1px solid #dfdfdf;
+  border-radius: 4px;
+  outline: none;
+  padding: 6px 12px;
+  &:hover {
+    background: #e0e0e0;
+    border-color: #b5b3b3;
+    cursor: pointer;
+  }
+  &.disabled {
+    color: rgba(0, 0, 0, 0.25);
+    border-color: #d9d9d9;
+    background-color: #e6e6e6;
+    cursor: not-allowed;
+    &:hover {
+      color: rgba(0, 0, 0, 0.25);
+      border-color: #d9d9d9;
+    }
+  }
+}

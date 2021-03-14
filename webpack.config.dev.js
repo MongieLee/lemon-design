@@ -15,14 +15,6 @@ module.exports = Object.assign({}, base, {
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
-  module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        loader: 'awesome-typescript-loader',
-      },
-    ],
-  },
   plugins: [
     new HtmlWebpackPlugin({
       template: 'index.html',
