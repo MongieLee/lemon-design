@@ -21,9 +21,9 @@ class Scroll extends React.Component<LdScrollProps, State> {
   public containerRef = React.createRef<HTMLDivElement>();
 
   public componentDidMount = () => {
-    window.addEventListener("mousemove", this.onMouseMove);
-    window.addEventListener("mouseup", this.onMouseUp);
-
+    document.addEventListener("mousemove", this.onMouseMove);
+    document.addEventListener("mouseup", this.onMouseUp);
+    document.addEventListener("selectstart", this.onSelect);
     const { current } = this.containerRef;
     const scrollHeight = current!.scrollHeight;
     const viewHeight = current!.getBoundingClientRect().height;
@@ -32,8 +32,9 @@ class Scroll extends React.Component<LdScrollProps, State> {
   };
 
   public componentWillUnmount = () => {
-    window.removeEventListener("mousemove", this.onMouseMove);
-    window.removeEventListener("mouseup", this.onMouseUp);
+    document.removeEventListener("mousemove", this.onMouseMove);
+    document.removeEventListener("mouseup", this.onMouseUp);
+    document.removeEventListener("selectstart", this.onSelect);
   };
 
   public onScroll: UIEventHandler = () => {
@@ -45,14 +46,14 @@ class Scroll extends React.Component<LdScrollProps, State> {
     this.setState({ barTop });
   };
 
-  public setBarTop = (scrollTop: number) => {
+  public setBarTop = (scrollTop: number, fn: () => void) => {
     if (scrollTop < 0) return;
     const { current } = this.containerRef;
     const scrollHeight = current!.scrollHeight;
     const viewHeight = current!.getBoundingClientRect().height;
     const maxBarTop = ((scrollHeight - viewHeight) * viewHeight) / scrollHeight;
     if (scrollTop > maxBarTop) return;
-    this.setState({ barTop: scrollTop });
+    this.setState({ barTop: scrollTop }, fn);
   };
 
   public onMouseDown: React.MouseEventHandler = (e) => {
@@ -60,14 +61,29 @@ class Scroll extends React.Component<LdScrollProps, State> {
     this.firstY = e.clientY - this.firstY;
     this.firstBarTop = this.state.barTop;
   };
+
   public onMouseMove = (event: MouseEvent) => {
     if (this.dragging) {
       const delta = event.clientY - this.firstY;
-      this.setBarTop(this.firstBarTop + delta);
+      const newBarTop = this.firstBarTop + delta;
+      this.setBarTop(newBarTop, () => {
+        const { current } = this.containerRef;
+        const scrollHeight = current!.scrollHeight;
+        const viewHeight = current!.getBoundingClientRect().height;
+        this.containerRef.current!.scrollTop =
+          (newBarTop * scrollHeight) / viewHeight;
+      });
     }
   };
+
   public onMouseUp = () => {
     this.dragging = false;
+  };
+
+  public onSelect = (event: Event) => {
+    if (this.dragging) {
+      event.preventDefault();
+    }
   };
 
   render() {
