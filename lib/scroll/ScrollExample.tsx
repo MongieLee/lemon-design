@@ -1,10 +1,10 @@
-import * as React from "react";
-import Scroll from "./Scroll";
+import * as React from 'react';
+import Scroll from './Scroll';
 
 class ScrollExample extends React.Component {
   render() {
     return (
-      <Scroll style={{ height: 200, border: `1px solid red` }}>
+      <Scroll onPull={() => console.log('我触发了')} style={{ height: 200 }}>
         <div>1</div>
         <div>2</div>
         <div>3</div>
