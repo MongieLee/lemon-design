@@ -1,0 +1,43 @@
+@import "../helper";
+.ld-dialog {
+  background: white;
+  position: fixed;
+  min-width: 30em;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 8px;
+  z-index: 2;
+  &-mask {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: fade-out($color: #000000, $amount: 0.5);
+  }
+  &-header {
+    border-bottom: 1px solid #ddd;
+    font-size: 22px;
+    padding: 8px 16px;
+  }
+  &-main {
+    padding: 8px 16px;
+    min-height: 4em;
+  }
+  &-footer {
+    border-top: 1px solid #ddd;
+    padding: 8px 16px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  &-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    color: $main-color;
+    border: 1px solid red;
+  }
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 import './button.scss';
-import classes from '../utils/classes';
+import { classes } from '../utils/classes';
 
 export interface LdButtonProps {
   handleClick?: React.MouseEventHandler;
@@ -20,11 +20,7 @@ class Button extends React.Component<LdButtonProps> {
   public render() {
     const { type, disabled, className, handleClick, ...rest } = this.props;
     return (
-      <button
-        onClick={handleClick}
-        className={classes('ld-button', type, className, { disabled })}
-        {...rest}
-      >
+      <button onClick={handleClick} className={classes('ld-button', type, className, { disabled })} {...rest}>
         按钮
       </button>
     );

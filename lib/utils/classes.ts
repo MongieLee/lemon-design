@@ -8,10 +8,10 @@ function classes(...names: any[]): string {
         classNames.push(className);
       });
     } else if (typeof arg === 'object' && !(arg instanceof Array)) {
-      console.log(arg)
+      console.log(arg);
       for (const key in arg) {
         if (arg.hasOwnProperty(key) && arg[key]) {
-          console.log('???')
+          console.log('???');
           classNames.push(key);
         }
       }
@@ -20,4 +20,10 @@ function classes(...names: any[]): string {
   return classNames.join(' ');
 }
 
-export default classes;
+function scopedClassMaker(prefix: string) {
+  return function (name?: string) {
+    return [prefix, name].filter(Boolean).join('-');
+  };
+}
+
+export { classes, scopedClassMaker };
